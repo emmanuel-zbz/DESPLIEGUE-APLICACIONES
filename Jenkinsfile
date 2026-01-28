@@ -8,7 +8,6 @@ pipeline {
     stages {
         stage('Compilar') {
             steps {
-                // 'clean' borra target previo. 'compile' solo genera los .class
                 sh 'mvn clean compile' 
             }
         }
@@ -33,4 +32,5 @@ pipeline {
         }
     }
 }
+
 
