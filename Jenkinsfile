@@ -6,9 +6,19 @@ pipeline {
     }
 
     stages {
-        stage('Compilar y Empaquetar') {
+        // ETAPA 1: Solo compilar y testear
+        stage('Test Unitarios') {
             steps {
-                sh 'mvn clean package'
+                // Ejecuta los tests. Si fallan, el pipeline se detiene aquí.
+                sh 'mvn clean test' 
+            }
+        }
+
+        // ETAPA 2: Empaquetar (saltando los tests porque ya pasaron)
+        stage('Empaquetar') {
+            steps {
+                // -DskipTests evita que se corran los tests de nuevo
+                sh 'mvn package -DskipTests' 
             }
         }
 
